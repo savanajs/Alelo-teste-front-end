@@ -1,0 +1,13 @@
+#header {
+  margin-bottom: 20px;
+}
+
+.logo {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.logo__icon {
+  color: #8630e5;
+  margin-right: 5px;
+}

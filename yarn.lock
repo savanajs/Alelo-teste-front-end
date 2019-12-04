@@ -1225,6 +1225,13 @@ amdefine@>=0.0.4:
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
 
+angular-notifier@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/angular-notifier/-/angular-notifier-6.0.1.tgz#54111ba4fab70b3b3600dbc87ed2dd63a4847aab"
+  integrity sha512-eC312pNkHfjBU1nflOxtRKbkuxZGthZj23wK1unZ9u+sIhdrUm2Fd2j4Tud8+5z9wQX+ec59v4pBfayO3AFx+Q==
+  dependencies:
+    tslib "^1.9.0"
+
 ansi-colors@4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/ansi-colors/-/ansi-colors-4.1.1.tgz#cbb9ae256bf750af1eab344f229aa27fe94ba348"
@@ -7164,6 +7171,11 @@ supports-color@^6.1.0:
   integrity sha512-qe1jfm1Mg7Nq/NSh6XE24gPXROEVsWHxC1LIx//XNlD9iw7YZQGjZNjYN7xGaEG6iKdA8EtNFW6R0gjnVXp+wQ==
   dependencies:
     has-flag "^3.0.0"
+
+sweetalert2@^9.4.3:
+  version "9.4.3"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-9.4.3.tgz#209e0561a5971deb20cc33dc45a77c1b6d6d79b2"
+  integrity sha512-edh+30p2tlE7CyNsTDVUb6SGO/c9wuCF4qiketagLvsK/xcesrSPvF8u9Ljk83HX26CfOicKWulmxz+Z+MAWVw==
 
 symbol-observable@1.2.0:
   version "1.2.0"

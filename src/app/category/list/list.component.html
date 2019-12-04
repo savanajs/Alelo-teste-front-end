@@ -1,0 +1,47 @@
+
+<section>
+    <div class="shell">
+      <div class="row row--vertical-center">
+        <div class="col col--10-lg col--9-md col--8-sm">
+            <h1 class="heading heading--primary">
+              <a routerLink="/categories" routerLinkActive="active" class="link" title="Voltar para a página anterior">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+              </a> / {{categoryName}}
+            </h1>
+        </div>
+        <div class="col col--2-lg col--3-md col--4-sm text-right">
+            <a routerLink="/categories/new" routerLinkActive="active" class="btn btn--primary">
+              <i class="fa fa-plus-circle" aria-hidden="true"></i> Novo
+            </a>
+        </div>
+      </div>
+    </div>
+</section>
+
+<section class="main">
+    <div class="shell">
+      <div class="row">
+        <div class="col col--12-lg col--12-md col--12-sm">
+            <h2 class="heading heading--secondary">
+              Listas <span class="featured">(33 tarefas)</span>
+            </h2>
+
+            <ul class="list list--block">
+              <li class="item card">
+                <div class="item__name">
+                  <a routerLink="/categories/1/edit" routerLinkActive="active" class="name__link">
+                    Categoria da tarefa
+                  </a>
+                </div>
+                <div class="item__actions">
+                  <a routerLink="/categories/1/lists/1/items" routerLinkActive="active" class="action__link">
+                    <i class="fa fa-list-ul" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </li>
+            </ul>
+        </div>
+      </div>
+    </div>
+</section>
+
