@@ -4,7 +4,7 @@ export default {
   categories: {
     index: `${BASE_URL_API}/categories`,
     show: id => `${BASE_URL_API}/categories/${id}`,
-    store: `${BASE_URL_API}/categories`,
+    store: `${BASE_URL_API}/categoriess`,
     update: id => `${BASE_URL_API}/categories/${id}`,
     destroy: id => `${BASE_URL_API}/categories/${id}`
   },

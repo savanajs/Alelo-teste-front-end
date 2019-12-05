@@ -14,19 +14,18 @@ class Utils {
         toast.addEventListener('mouseenter', Swal.stopTimer)
         toast.addEventListener('mouseleave', Swal.resumeTimer)
       }
-    })
+    });
 
   }
 
   notify(icon, title) {
 
-    if (icon == "error" && !title) {
-      title = "Houve um erro, por favor tende novamente mais tarde!"
-    }
+    if (icon == 'error' && (!title || title === 'Not found'))
+      title = 'Houve um erro, por favor tente novamente mais tarde!'
 
     this.Toast.fire({
       icon, title
-    })
+    });
 
   }
 
