@@ -33,16 +33,19 @@
             <div class="item__name">
               <a routerLink="/categories/{{idCategory}}/lists/{{idList}}/items/{{item.id}}/edit"
                 [queryParams]="{category: categoryName, list: listName}" routerLinkActive="active" class="name__link">
-                {{item.name}} {{ item.done }}
+                {{item.name}}
               </a>
             </div>
             <div class="item__actions">
               <a routerLink="/categories/{{idCategory}}/lists/{{idList}}/items/{{item.id}}/edit"
                 [queryParams]="{category: categoryName, list: listName}" class="action__link done">
                 <i class="fa fa-pencil" aria-hidden="true"></i>
+                <span>Editar</span>
               </a>
               <a (click)="onDone(item)" class="action__link">
                 <i class="fa fa-check-circle" [ngClass]="{done: item.done}" aria-hidden="true"></i>
+                <span *ngIf="item.done">Feito</span>
+                <span *ngIf="!item.done">Aberto</span>
               </a>
             </div>
           </li>

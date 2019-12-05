@@ -7,23 +7,27 @@ import { Item } from './item';
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
-  styleUrls: ['./item.component.css']
+  styleUrls: []
 })
 
 export class ItemComponent implements OnInit {
 
-  constructor(private _activedRoute: ActivatedRoute, private _itemService: ItemService, private _router: Router) { }
+  constructor(
+    private activedRoute: ActivatedRoute,
+    private itemService: ItemService,
+    private router: Router
+  ) {}
 
   public categoryName: string;
   public idCategory: string;
   public listName: string;
   public idList: string;
   public tasks: Item[];
-  public existsTasks: boolean = true;
+  public existsTasks = true;
 
-  getTasks(){
+  getTasks() {
 
-    this._itemService.getAll(this.idCategory, this.idList).subscribe(response => {
+    this.itemService.getAll(this.idCategory, this.idList).subscribe(response => {
 
         if (response && !response.length) {
           this.existsTasks = false;
@@ -35,22 +39,33 @@ export class ItemComponent implements OnInit {
             item.id,
             item.name,
             item.done
-          )
+          );
         });
 
-      }
+    }, () => {
 
-    )
+      this.existsTasks = false;
+
+    });
 
   }
 
-  private update(item:Item): void {
+  private update(item: Item): void {
 
-    this._itemService.update(this.idCategory, this.idList, item.id, item).subscribe(() => {
+    this.itemService.update(this.idCategory, this.idList, item.id, item).subscribe(() => {
 
-      this._router.navigate(['/categories', this.idCategory, 'lists', this.idList, 'items'], {
-        queryParams: { category: this.categoryName, list: this.listName }
-      });
+      this.router.navigate(
+        [
+          '/categories', this.idCategory,
+          'lists', this.idList, 'items'
+        ],
+        {
+          queryParams: {
+            category: this.categoryName,
+            list: this.listName
+          }
+        }
+      );
 
     }, () => {
 
@@ -60,7 +75,7 @@ export class ItemComponent implements OnInit {
 
   }
 
-  onDone(item){
+  onDone(item) {
 
     item.done = !item.done;
 
@@ -70,16 +85,14 @@ export class ItemComponent implements OnInit {
 
   ngOnInit() {
 
-    this.idCategory = this._activedRoute.snapshot.paramMap.get('idCategory');
-    this.idList = this._activedRoute.snapshot.paramMap.get('idList');
+    this.idCategory = this.activedRoute.snapshot.paramMap.get('idCategory');
+    this.idList = this.activedRoute.snapshot.paramMap.get('idList');
 
-    this._activedRoute.queryParams.subscribe(params => {
-
-        this.categoryName = params['category'];
-        this.listName = params['list'];
+    this.activedRoute.queryParams.subscribe(params => {
+        this.categoryName = params.category;
+        this.listName = params.list;
 
         this.getTasks();
-
     });
 
   }

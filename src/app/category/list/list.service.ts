@@ -10,25 +10,26 @@ import { List } from './list';
 
 export class ListService {
 
-  constructor(private _httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
   insert(idCategory: string, list: List): Observable<List> {
-    return this._httpClient.post<List>(endpoints.lists.store(idCategory), list);
+    return this.httpClient.post<List>(endpoints.lists.store(idCategory), list);
   }
 
   get(idCategory: string, idList: string): Observable<List> {
-    return this._httpClient.get<List>(endpoints.lists.show(idCategory, idList));
+    return this.httpClient.get<List>(endpoints.lists.show(idCategory, idList));
   }
 
   update(idCategory: string, idList: string, list: List): Observable<List> {
-    return this._httpClient.put<List>(endpoints.lists.update(idCategory, idList), list);
+    return this.httpClient.put<List>(endpoints.lists.update(idCategory, idList), list);
   }
 
   getAll(idCategory: string): Observable<List[]> {
-    return this._httpClient.get<List[]>(endpoints.lists.index(idCategory));
+    return this.httpClient.get<List[]>(endpoints.lists.index(idCategory));
   }
 
   delete(idCategory: string, idList: string): Observable<List> {
-    return this._httpClient.delete<List>(endpoints.lists.destroy(idCategory, idList));
+    return this.httpClient.delete<List>(endpoints.lists.destroy(idCategory, idList));
   }
+
 }

@@ -1,44 +1,46 @@
-
 <section>
-    <div class="shell">
-      <div class="row row--vertical-center">
-        <div class="col col--10-lg col--9-md col--8-sm">
-            <h1 class="heading heading--primary">Tarefas</h1>
-        </div>
-        <div class="col col--2-lg col--3-md col--4-sm text-right">
-            <a routerLink="/categories/new" routerLinkActive="active" class="btn btn--primary">
-              <i class="fa fa-plus-circle" aria-hidden="true"></i> Novo
-            </a>
-        </div>
+  <div class="shell">
+    <div class="row row--vertical-center">
+      <div class="col col--10-lg col--9-md col--8-sm">
+        <h1 class="heading heading--primary">Tarefas</h1>
+      </div>
+      <div class="col col--2-lg col--3-md col--4-sm text-right">
+        <a routerLink="/categories/new" routerLinkActive="active" class="btn btn--primary">
+          <i class="fa fa-plus-circle" aria-hidden="true"></i> Novo
+        </a>
       </div>
     </div>
+  </div>
 </section>
 
 <section class="main" *ngIf="categories as items; else loading">
-    <div class="shell">
-      <div class="row">
-        <div class="col col--12-lg col--12-md col--12-sm">
-            <h2 class="heading heading--secondary">
-              Categorias <span class="featured">({{items.length}} tarefas)</span>
-            </h2>
+  <div class="shell">
+    <div class="row">
+      <div class="col col--12-lg col--12-md col--12-sm">
+        <h2 class="heading heading--secondary">
+          Categorias <span class="featured">({{items.length}} tarefas)</span>
+        </h2>
 
-            <ul class="list list--block">
-              <li class="item card" *ngFor="let item of items">
-                <div class="item__name">
-                  <a routerLink="/categories/{{item.id}}/lists" [queryParams]="{category: item.name}" routerLinkActive="active" class="name__link">
-                    {{item.name}}
-                  </a>
-                </div>
-                <div class="item__actions">
-                  <a title="Editar tarefa" routerLink="/categories/{{item.id}}/edit" routerLinkActive="active" class="action__link">
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                  </a>
-                </div>
-              </li>
-            </ul>
-        </div>
+        <ul class="list list--block">
+          <li class="item card" *ngFor="let item of items">
+            <div class="item__name">
+              <a routerLink="/categories/{{item.id}}/lists" [queryParams]="{category: item.name}"
+                routerLinkActive="active" class="name__link">
+                {{item.name}}
+              </a>
+            </div>
+            <div class="item__actions">
+              <a title="Editar tarefa" routerLink="/categories/{{item.id}}/edit" routerLinkActive="active"
+                class="action__link">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+                <span>Editar</span>
+              </a>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
+  </div>
 </section>
 
 <ng-template #loading>
@@ -49,4 +51,3 @@
     <app-tasksnotfound></app-tasksnotfound>
   </div>
 </ng-template>
-

@@ -2,7 +2,7 @@ import Swal from 'sweetalert2';
 
 class Utils {
 
-  constructor(){
+  constructor() {
 
     this.Toast = Swal.mixin({
       toast: true,
@@ -18,9 +18,9 @@ class Utils {
 
   }
 
-  notify(icon, title){
+  notify(icon, title) {
 
-    if(icon == "error") {
+    if (icon == "error" && !title) {
       title = "Houve um erro, por favor tende novamente mais tarde!"
     }
 

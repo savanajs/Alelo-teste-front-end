@@ -7,36 +7,50 @@ import { Item } from '../item';
 @Component({
   selector: 'app-form-item',
   templateUrl: './form-item.component.html',
-  styleUrls: ['./form-item.component.css']
+  styleUrls: []
 })
 
 export class FormItemComponent implements OnInit {
 
-  public pageLoaded: boolean = false;
+  public pageLoaded = false;
   public task: Item;
   public idCategory: string;
   public categoryName: string;
   public idList: string;
   public listName: string;
   public idItem: string;
-  public formAvaliable: boolean = true;
+  public formAvaliable = true;
   public isUpdated: boolean;
 
-  constructor(private _itemService: ItemService, private _router: Router, private _activedRoute: ActivatedRoute) { }
+  constructor(
+    private itemService: ItemService,
+    private router: Router,
+    private activedRoute: ActivatedRoute
+  ) {}
 
   private insert(): void {
 
-    this._itemService.insert(this.idCategory, this.idList, this.task).subscribe(response => {
+    this.itemService.insert(this.idCategory, this.idList, this.task).subscribe(() => {
 
-      this._router.navigate(['/categories', this.idCategory, 'lists', this.idList, 'items'], {
-        queryParams: { category: this.categoryName, list: this.listName }
+      this.router.navigate(
+        [
+          '/categories',
+          this.idCategory,
+          'lists',
+          this.idList,
+          'items'
+        ], {
+          queryParams: {
+            category: this.categoryName,
+            list: this.listName
+          }
       });
 
       Utils.notify('success', 'A tarefa foi cadastrada com sucesso!');
 
-    }, () => {
+    }, (err) => {
 
-      Utils.notify('error');
+      Utils.notify('error', err.error);
 
     });
 
@@ -44,17 +58,29 @@ export class FormItemComponent implements OnInit {
 
   private update(): void {
 
-    this._itemService.update(this.idCategory, this.idList, this.idItem, this.task).subscribe(() => {
+    this.itemService.update(this.idCategory, this.idList, this.idItem, this.task).subscribe(() => {
 
-      this._router.navigate(['/categories', this.idCategory, 'lists', this.idList, 'items'], {
-        queryParams: { category: this.categoryName, list: this.listName }
-      });
+      this.router.navigate(
+        [
+          '/categories',
+          this.idCategory,
+          'lists',
+          this.idList,
+          'items'
+        ],
+        {
+          queryParams: {
+            category: this.categoryName,
+            list: this.listName
+          }
+        }
+      );
 
       Utils.notify('success', 'A tarefa foi alterada com sucesso!');
 
-    }, () => {
+    }, (err) => {
 
-      Utils.notify('error');
+      Utils.notify('error', err.error);
 
     });
 
@@ -62,7 +88,7 @@ export class FormItemComponent implements OnInit {
 
   private getTask(): void {
 
-    this._itemService.get(this.idCategory, this.idList, this.idItem)
+    this.itemService.get(this.idCategory, this.idList, this.idItem)
       .subscribe(response => {
 
         this.task = new Item(
@@ -83,17 +109,29 @@ export class FormItemComponent implements OnInit {
 
   private delete(): void {
 
-    this._itemService.delete(this.idCategory, this.idList, this.idItem).subscribe(() => {
+    this.itemService.delete(this.idCategory, this.idList, this.idItem).subscribe(() => {
 
-      this._router.navigate(['/categories', this.idCategory, 'lists', this.idList, 'items'], {
-        queryParams: { category: this.categoryName, list: this.listName }
-      });
+      this.router.navigate(
+        [
+          '/categories',
+          this.idCategory,
+          'lists',
+          this.idList,
+          'items'
+        ],
+        {
+          queryParams: {
+            category: this.categoryName,
+            list: this.listName
+          }
+        }
+      );
 
-      Utils.notify('success', 'A tarefa foi excluida com sucesso!');
+      Utils.notify('success', 'A tarefa foi excluída com sucesso!');
 
-    }, () => {
+    }, (err) => {
 
-      Utils.notify('error');
+      Utils.notify('error', err.error);
 
     });
 
@@ -115,26 +153,28 @@ export class FormItemComponent implements OnInit {
 
   onDelete(): void {
 
-    const confirm = window.confirm("Gostaria realmente de remover essa tarefa?");
+    const confirm = window.confirm('Gostaria realmente de remover essa tarefa?');
 
     if (confirm) {
+
       this.delete();
+
     }
 
   }
 
   ngOnInit() {
 
-    this.task = new Item("", "", false);
+    this.task = new Item('', '', false);
 
-    this.idCategory = this._activedRoute.snapshot.paramMap.get('idCategory');
-    this.idList = this._activedRoute.snapshot.paramMap.get('idList');
-    this.idItem = this._activedRoute.snapshot.paramMap.get('idItem');
+    this.idCategory = this.activedRoute.snapshot.paramMap.get('idCategory');
+    this.idList = this.activedRoute.snapshot.paramMap.get('idList');
+    this.idItem = this.activedRoute.snapshot.paramMap.get('idItem');
 
-    this._activedRoute.queryParams.subscribe(params => {
+    this.activedRoute.queryParams.subscribe(params => {
 
-        this.categoryName = params['category'];
-        this.listName = params['list'];
+      this.categoryName = params.category;
+      this.listName = params.list;
 
     });
 

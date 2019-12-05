@@ -7,34 +7,47 @@ import { List } from '../list';
 @Component({
   selector: 'app-form-list',
   templateUrl: './form-list.component.html',
-  styleUrls: ['./form-list.component.css']
+  styleUrls: []
 })
 
 export class FormListComponent implements OnInit {
 
-  public pageLoaded: boolean = false;
+  public pageLoaded = false;
   public task: List;
   public idCategory: string;
   public categoryName: string;
   public idList: string;
-  public formAvaliable: boolean = true;
+  public formAvaliable = true;
   public isUpdated: boolean;
 
-  constructor(private _listService: ListService, private _router: Router, private _activedRoute: ActivatedRoute) { }
+  constructor(
+    private listService: ListService,
+    private router: Router,
+    private activedRoute: ActivatedRoute
+  ) {}
 
   private insert(): void {
 
-    this._listService.insert(this.idCategory, this.task).subscribe(response => {
+    this.listService.insert(this.idCategory, this.task).subscribe(response => {
 
-      this._router.navigate(['/categories', this.idCategory, 'lists', response.id, 'items'], {
-        queryParams: { category: this.categoryName, list: response.name }
-      });
+      this.router.navigate(
+        [
+          '/categories', this.idCategory,
+          'lists', response.id, 'items'
+        ],
+        {
+          queryParams: {
+            category: this.categoryName,
+            list: response.name
+          }
+        }
+      );
 
       Utils.notify('success', 'A tarefa foi cadastrada com sucesso!');
 
-    }, () => {
+    }, (err) => {
 
-      Utils.notify('error');
+      Utils.notify('error', err.error);
 
     });
 
@@ -42,17 +55,26 @@ export class FormListComponent implements OnInit {
 
   private update(): void {
 
-    this._listService.update(this.idCategory, this.idList, this.task).subscribe(() => {
+    this.listService.update(this.idCategory, this.idList, this.task).subscribe(() => {
 
-      this._router.navigate(['/categories', this.idCategory, 'lists'], {
-        queryParams: { category: this.categoryName }
-      });
+      this.router.navigate(
+        [
+          '/categories',
+          this.idCategory,
+          'lists'
+        ],
+        {
+          queryParams: {
+            category: this.categoryName
+          }
+        }
+      );
 
       Utils.notify('success', 'A tarefa foi alterada com sucesso!');
 
-    }, () => {
+    }, (err) => {
 
-      Utils.notify('error');
+      Utils.notify('error', err.error);
 
     });
 
@@ -60,7 +82,7 @@ export class FormListComponent implements OnInit {
 
   private getTask(): void {
 
-    this._listService.get(this.idCategory, this.idList)
+    this.listService.get(this.idCategory, this.idList)
       .subscribe(response => {
 
         this.task = new List(
@@ -80,17 +102,26 @@ export class FormListComponent implements OnInit {
 
   private delete(): void {
 
-    this._listService.delete(this.idCategory, this.idList).subscribe(() => {
+    this.listService.delete(this.idCategory, this.idList).subscribe(() => {
 
-      this._router.navigate(['/categories', this.idCategory, 'lists'], {
-        queryParams: { category: this.categoryName }
-      });
+      this.router.navigate(
+        [
+          '/categories',
+          this.idCategory,
+          'lists'
+        ],
+        {
+          queryParams: {
+            category: this.categoryName
+          }
+        }
+      );
 
-      Utils.notify('success', 'A tarefa foi excluida com sucesso!');
+      Utils.notify('success', 'A tarefa foi excluída com sucesso!');
 
-    }, () => {
+    }, (err) => {
 
-      Utils.notify('error');
+      Utils.notify('error', err.error);
 
     });
 
@@ -112,23 +143,25 @@ export class FormListComponent implements OnInit {
 
   onDelete(): void {
 
-    const confirm = window.confirm("Gostaria realmente de remover essa tarefa?");
+    const confirm = window.confirm('Gostaria realmente de remover essa tarefa?');
 
     if (confirm) {
+
       this.delete();
+
     }
 
   }
 
   ngOnInit() {
 
-    this.task = new List("", "");
-    this.idCategory = this._activedRoute.snapshot.paramMap.get('idCategory');
-    this.idList = this._activedRoute.snapshot.paramMap.get('idList');
+    this.task = new List('', '');
+    this.idCategory = this.activedRoute.snapshot.paramMap.get('idCategory');
+    this.idList = this.activedRoute.snapshot.paramMap.get('idList');
 
-    this._activedRoute.queryParams.subscribe(params => {
+    this.activedRoute.queryParams.subscribe(params => {
 
-        this.categoryName = params['category'];
+        this.categoryName = params.category;
 
     });
 

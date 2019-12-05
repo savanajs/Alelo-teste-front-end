@@ -7,32 +7,43 @@ import Utils from '../../../utils';
 @Component({
   selector: 'app-form-category',
   templateUrl: './form-category.component.html',
-  styleUrls: ['./form-category.component.css']
+  styleUrls: []
 })
 
 export class FormCategoryComponent implements OnInit {
 
-  public pageLoaded: boolean = false;
+  public pageLoaded = false;
   public category: Category;
   public idCategory: string;
-  public formAvaliable: boolean = true;
+  public formAvaliable = true;
   public isUpdated: boolean;
 
-  constructor(private _categoryService: CategoryService, private _router: Router, private _activedRoute: ActivatedRoute) { }
+  constructor(
+    private categoryService: CategoryService,
+    private router: Router,
+    private activedRoute: ActivatedRoute
+  ) { }
 
   private insert(): void {
 
-    this._categoryService.insert(this.category).subscribe(response => {
+    this.categoryService.insert(this.category).subscribe(response => {
 
-      this._router.navigate(['/categories', response.id, 'lists'], {
-        queryParams: { category: response.name }
-      });
+      this.router.navigate(
+        [
+          '/categories', response.id, 'lists'
+        ],
+        {
+          queryParams: {
+            category: response.name
+          }
+        }
+      );
 
       Utils.notify('success', 'A tarefa foi cadastrada com sucesso!');
 
-    }, () => {
+    }, (err) => {
 
-      Utils.notify('error');
+      Utils.notify('error', err.error);
 
     });
 
@@ -40,15 +51,15 @@ export class FormCategoryComponent implements OnInit {
 
   private update(): void {
 
-    this._categoryService.update(this.idCategory, this.category).subscribe(() => {
+    this.categoryService.update(this.idCategory, this.category).subscribe(() => {
 
-      this._router.navigate(['/categories']);
+      this.router.navigate(['/categories']);
 
       Utils.notify('success', 'A tarefa foi alterada com sucesso!');
 
-    }, () => {
+    }, (err) => {
 
-      Utils.notify('error');
+      Utils.notify('error', err.error);
 
     });
 
@@ -56,37 +67,36 @@ export class FormCategoryComponent implements OnInit {
 
   private getCategory(idCategory: string): void {
 
-    this._categoryService.get(idCategory)
-      .subscribe(response => {
+    this.categoryService.get(idCategory).subscribe(response => {
 
-        const { id, name } = response;
+      const { id, name } = response;
 
-        this.category = new Category(
-          id,
-          name
-        );
+      this.category = new Category(
+        id,
+        name
+      );
 
-        this.pageLoaded = true;
+      this.pageLoaded = true;
 
-      }, () => {
+    }, () => {
 
-        this.formAvaliable = false;
-        this.pageLoaded = true;
+      this.formAvaliable = false;
+      this.pageLoaded = true;
 
-      });
+    });
   }
 
   private delete(): void {
 
-    this._categoryService.delete(this.idCategory).subscribe(() => {
+    this.categoryService.delete(this.idCategory).subscribe(() => {
 
-      this._router.navigate(['/categories']);
+      this.router.navigate(['/categories']);
 
-      Utils.notify('success', 'A tarefa foi excluida com sucesso!');
+      Utils.notify('success', 'A tarefa foi excluída com sucesso!');
 
-    }, () => {
+    }, (err) => {
 
-      Utils.notify('error');
+      Utils.notify('error', err.error);
 
     });
 
@@ -108,18 +118,20 @@ export class FormCategoryComponent implements OnInit {
 
   onDelete(): void {
 
-    const confirm = window.confirm("Gostaria realmente de remover essa tarefa?");
+    const confirm = window.confirm('Gostaria realmente de remover essa tarefa?');
 
     if (confirm) {
+
       this.delete();
+
     }
 
   }
 
   ngOnInit() {
 
-    this.category = new Category("", "");
-    this.idCategory = this._activedRoute.snapshot.paramMap.get('idCategory');
+    this.category = new Category('', '');
+    this.idCategory = this.activedRoute.snapshot.paramMap.get('idCategory');
 
     if (this.idCategory) {
 

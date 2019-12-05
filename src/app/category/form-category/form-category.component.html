@@ -23,13 +23,13 @@
           <div class="input-control">
             <label for="name" class="label">Nome da tarefa *</label>
             <div class="row card row--vertical-center">
-              <div class="col col--10-lg col--10-md col--9-sm">
+              <div class="col col--10-lg col--10-md col--8-sm">
                 <div class="control-input">
                   <input type="text" id="name" name="name" [(ngModel)]="category.name" class="input"
                     placeholder="Digite o nome da tarefa" #name="ngModel" required />
                 </div>
               </div>
-              <div class="col col--2-lg col--2-md col--3-sm text-right form-actions">
+              <div class="col col--2-lg col--2-md col--4-sm text-right form-actions">
                 <button class="btn btn--primary" type="submit" [disabled]="fm.invalid">
                   <i class="fa fa-floppy-o" aria-hidden="true"></i> Salvar
                 </button>

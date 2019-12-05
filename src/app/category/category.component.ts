@@ -5,33 +5,37 @@ import { Category } from './category';
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css']
+  styleUrls: []
 })
+
 export class CategoryComponent implements OnInit {
 
-  constructor(private _categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService) { }
+
   public categories: Category[];
-  public existsCategories: boolean = true;
+  public existsCategories = true;
 
   ngOnInit() {
 
-    this._categoryService.getAll().subscribe(response => {
+    this.categoryService.getAll().subscribe(response => {
 
-        if(response && !response.length) {
-          this.existsCategories = false;
-          return;
-        }
-
-        this.categories = response.map(item => {
-          return new Category(
-            item.id,
-            item.name
-          )
-        });
-
-        console.log("this.categories", this.categories)
+      if (response && !response.length) {
+        this.existsCategories = false;
+        return;
       }
-    )
+
+      this.categories = response.map(item => {
+        return new Category(
+          item.id,
+          item.name
+        );
+      }).reverse();
+
+    }, () => {
+
+      this.existsCategories = false;
+
+    });
 
   }
 
