@@ -1,68 +1,69 @@
-
 <section>
-    <div class="shell">
-      <div class="row row--vertical-center">
-        <div class="col col--10-lg col--9-md col--8-sm">
-            <h1 *ngIf="isUpdated" class="heading heading--primary">Atualizar categoria</h1>
-            <h1 *ngIf="!isUpdated" class="heading heading--primary">Adicionar categoria</h1>
-        </div>
-        <div class="col col--2-lg col--3-md col--4-sm text-right">
-            <a routerLink="/categories" routerLinkActive="active" class="btn btn--primary">
-              <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Voltar
-            </a>
-        </div>
+  <div class="shell">
+    <div class="row row--vertical-center">
+      <div class="col col--10-lg col--9-md col--8-sm">
+        <h1 *ngIf="isUpdated" class="heading heading--primary">Atualizar tarefa</h1>
+        <h1 *ngIf="!isUpdated" class="heading heading--primary">Adicionar tarefa</h1>
+      </div>
+      <div class="col col--2-lg col--3-md col--4-sm text-right">
+        <a href="javascript:history.back()" class="btn">
+          <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Voltar
+        </a>
       </div>
     </div>
+  </div>
 </section>
 
 <section class="main" *ngIf="pageLoaded && formAvaliable; else loading">
-    <div class="shell">
-      <div class="row">
-        <div class="col col--12-lg col--12-md col--12-sm">
-          <form #fm="ngForm" class="form" autocomplete="off" (ngSubmit)="onSubmit()">
+  <div class="shell">
+    <div class="row">
+      <div class="col col--12-lg col--12-md col--12-sm">
+        <form #fm="ngForm" class="form" autocomplete="off" (ngSubmit)="onSubmit()">
 
-            <div class="input-control">
-              <label for="name" class="label">Nome da categoria *</label>
-              <div class="row card row--vertical-center">
-                  <div class="col col--10-lg col--10-md col--9-sm">
-                      <div class="control-input">
-                         <input type="text" id="name" name="name" [(ngModel)]="category.name" class="input" placeholder="Digite o nome da categoria da tarefa" #name="ngModel" required />
-                      </div>
-                  </div>
-                  <div class="col col--2-lg col--2-md col--3-sm text-right">
-                    <button class="btn" type="submit" [disabled]="fm.invalid">
-                        <i class="fa fa-floppy-o" aria-hidden="true"></i> Salvar
-                    </button>
-                  </div>
+          <div class="input-control">
+            <label for="name" class="label">Nome da tarefa *</label>
+            <div class="row card row--vertical-center">
+              <div class="col col--10-lg col--10-md col--9-sm">
+                <div class="control-input">
+                  <input type="text" id="name" name="name" [(ngModel)]="category.name" class="input"
+                    placeholder="Digite o nome da tarefa" #name="ngModel" required />
+                </div>
               </div>
-              <span class="error" *ngIf="(name.dirty || name.touched) && !name.valid">Campo obrigatório</span>
+              <div class="col col--2-lg col--2-md col--3-sm text-right form-actions">
+                <button class="btn btn--primary" type="submit" [disabled]="fm.invalid">
+                  <i class="fa fa-floppy-o" aria-hidden="true"></i> Salvar
+                </button>
+              </div>
             </div>
-          </form>
-        </div>
+            <span class="error" *ngIf="(name.dirty || name.touched) && !name.valid">Campo obrigatório</span>
+          </div>
+        </form>
       </div>
     </div>
+  </div>
 </section>
 
 <section *ngIf="pageLoaded && isUpdated && formAvaliable">
-    <div class="shell">
-      <div class="row row--vertical-center">
-        <div class="col col--12-lg col--12-md col--12-sm">
-            <h1 class="heading heading--primary">Remover categoria</h1>
-            <p class="sub-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore voluptatem architecto aliquid dolor repudiandae assumenda nostrum beatae corrupti provident quam? Recusandae, expedita assumenda eaque deserunt praesentium sequi ipsa repellendus nisi.</p>
-            <a (click)="onDelete()" routerLinkActive="active" class="btn btn--cancel">
-              <i class="fa fa-trash" aria-hidden="true"></i> Excluir
-            </a>
-        </div>
+  <div class="shell">
+    <div class="row row--vertical-center">
+      <div class="col col--12-lg col--12-md col--12-sm">
+        <h1 class="heading heading--primary">Remover tarefa</h1>
+        <p class="sub-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore voluptatem architecto
+          aliquid dolor repudiandae assumenda nostrum beatae corrupti provident quam? Recusandae, expedita assumenda
+          eaque deserunt praesentium sequi ipsa repellendus nisi.</p>
+        <a (click)="onDelete()" routerLinkActive="active" class="btn btn--cancel">
+          <i class="fa fa-trash" aria-hidden="true"></i> Excluir
+        </a>
       </div>
     </div>
+  </div>
 </section>
 
 <ng-template #loading>
-    <div *ngIf="formAvaliable">
-      <app-loading></app-loading>
-    </div>
-    <div *ngIf="!formAvaliable">
-      <app-tasksnotfound></app-tasksnotfound>
-    </div>
+  <div *ngIf="formAvaliable">
+    <app-loading></app-loading>
+  </div>
+  <div *ngIf="!formAvaliable">
+    <app-tasksnotfound></app-tasksnotfound>
+  </div>
 </ng-template>
-

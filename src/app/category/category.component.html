@@ -25,13 +25,13 @@
             <ul class="list list--block">
               <li class="item card" *ngFor="let item of items">
                 <div class="item__name">
-                  <a routerLink="/categories/{{item.id}}/edit" routerLinkActive="active" class="name__link">
+                  <a routerLink="/categories/{{item.id}}/lists" [queryParams]="{category: item.name}" routerLinkActive="active" class="name__link">
                     {{item.name}}
                   </a>
                 </div>
                 <div class="item__actions">
-                  <a routerLink="/categories/1/lists" [queryParams]="{category: item.name}" routerLinkActive="active" class="action__link">
-                    <i class="fa fa-list-ul" aria-hidden="true"></i>
+                  <a title="Editar tarefa" routerLink="/categories/{{item.id}}/edit" routerLinkActive="active" class="action__link">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
                   </a>
                 </div>
               </li>

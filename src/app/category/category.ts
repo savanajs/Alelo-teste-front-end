@@ -1,4 +1,5 @@
 export class Category {
+
   id: string;
   name: string;
 
@@ -6,4 +7,5 @@ export class Category {
     this.id = id;
     this.name = name;
   }
+
 }

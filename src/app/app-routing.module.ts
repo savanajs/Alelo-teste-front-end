@@ -15,10 +15,10 @@ const routes: Routes = [
   { path: 'categories/:idCategory/edit', component: FormCategoryComponent },
   { path: 'categories/:idCategory/lists', component: ListComponent },
   { path: 'categories/:idCategory/lists/new', component: FormListComponent  },
-  { path: 'ategories/:idCategory/lists/:idItem/edit', component: FormListComponent  },
+  { path: 'categories/:idCategory/lists/:idList/edit', component: FormListComponent  },
   { path: 'categories/:idCategory/lists/:idList/items', component: ItemComponent },
-  { path: 'categories/:idCategory/lists/:idListlists/items/new', component: FormItemComponent},
-  { path: 'categories/:idCategory/lists/:idList/lists/:id/items/:idItem/edit', component: FormItemComponent },
+  { path: 'categories/:idCategory/lists/:idList/items/new', component: FormItemComponent},
+  { path: 'categories/:idCategory/lists/:idList/items/:idItem/edit', component: FormItemComponent },
   { path: '**', component: PagenotfoundComponent },
 ];
 

@@ -59,9 +59,11 @@ export class FormCategoryComponent implements OnInit {
     this._categoryService.get(idCategory)
       .subscribe(response => {
 
+        const { id, name } = response;
+
         this.category = new Category(
-          response.id,
-          response.name
+          id,
+          name
         );
 
         this.pageLoaded = true;

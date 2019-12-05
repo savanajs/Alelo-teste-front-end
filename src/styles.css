@@ -192,7 +192,7 @@ a {
   opacity: 1;
 }
 
-.action__link.done {
+.action__link .done {
   color: #30e586;
 }
 
@@ -204,8 +204,9 @@ a {
   margin-top: 20px;
 }
 
-.form .btn {
-  padding: 0px;
+.form .form-actions {
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 .form .label {
